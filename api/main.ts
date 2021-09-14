@@ -13,9 +13,9 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     `https://www.fifarosters.com/players?futid=${resourceId}`,
     { resources: "usable" }
   );
+  const { document } = window;
 
-  window.addEventListener("load", () => {
-    const { document } = window;
+  setTimeout(() => {
     const cardElement = document.getElementsByClassName("player")[0].children[0];
     const pictureElement = document.getElementsByClassName("playercard-picture")[0];
     const nameElement = document.getElementsByClassName("playercard-name")[0];
@@ -38,5 +38,5 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
       clubUrl: clubElement.children[0].getAttribute("src"),
       faceUrl: pictureElement.children[0].getAttribute("src"),
     });
-  });
+  }, 400);
 };
