@@ -9,7 +9,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-  const informations = [];
+  const informations = {};
 
   for (const resourceId of (req.query.resourceId as string).split(",")) {
     const ids = futbinPlayerIds.find((p) => p.player_id === parseInt(resourceId));
@@ -24,7 +24,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
       `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${ids.futbin_id}`
     );
 
-    informations.push(information.data[0]);
+    informations[resourceId] = information.data[0];
   }
 
   res.send(informations);

@@ -15,14 +15,14 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   }
 
   const { platform } = req.query;
-  const prices = [];
+  const prices = {};
 
   for (const resourceId of (req.query.resourceId as string).split(",")) {
     const { data: price } = await Axios.get(
       `https://futbin.org/futbin/api/fetchPriceInformation?playerresource=${resourceId}&platform=${platform}`
     );
 
-    prices.push({ ...price, resourceId: parseInt(resourceId) });
+    prices[resourceId] = price;
   }
 
   res.send(prices);
