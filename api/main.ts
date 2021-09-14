@@ -2,6 +2,12 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 import { JSDOM } from "jsdom";
 
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
+  if (!req.query.resourceId) {
+    res.statusCode = 400;
+    res.send({ message: "Error, you must provide resourceId" });
+    return;
+  }
+
   const { resourceId } = req.query;
   const { window } = await JSDOM.fromURL(
     `https://www.fifarosters.com/players?futid=${resourceId}`,
