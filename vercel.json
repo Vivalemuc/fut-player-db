@@ -1,13 +1,12 @@
 {
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "headers": [
         { "key": "access-control-allow-origin", "value": "*" },
         { "key": "access-control-allow-methods", "value": "*" },
         { "key": "access-control-allow-headers", "value": "*" }
       ]
     }
-  ],
-  "routes": [{ "src": "/", "dest": "/api/main.ts" }]
+  ]
 }
