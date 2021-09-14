@@ -5,7 +5,7 @@ import futbinPlayerIds from "./futbin-playerids.json";
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
   if (!req.query.resourceId) {
     res.statusCode = 400;
-    res.send({ message: "Error, you must provide resourceId." });
+    res.send({ message: "Error, you must provide a valid resourceId." });
     return;
   }
 
@@ -18,9 +18,9 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-  const response = await Axios.get(
+  const { data } = await Axios.get(
     `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${ids.futbin_id}`
   );
 
-  res.send(response.data.data[0]);
+  res.send(data.data[0]);
 };
