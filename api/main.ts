@@ -6,7 +6,7 @@ import Axios from "axios";
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
   if (!req.query.resourceId) {
     res.statusCode = 400;
-    res.send({ message: "Error, you must provide resourceId" });
+    res.send({ message: "Error, you must provide resourceId." });
     return;
   }
 
