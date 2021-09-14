@@ -14,11 +14,16 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-  const { platform, resourceId } = req.query;
+  const { platform } = req.query;
+  const prices = [];
 
-  const { data } = await Axios.get(
-    `https://futbin.org/futbin/api/fetchPriceInformation?playerresource=${resourceId}&platform=${platform}`
-  );
+  for (const resourceId of (req.query.resourceId as string).split(",")) {
+    const { data: price } = await Axios.get(
+      `https://futbin.org/futbin/api/fetchPriceInformation?playerresource=${resourceId}&platform=${platform}`
+    );
 
-  res.send(data);
+    prices.push({ ...price, resourceId: parseInt(resourceId) });
+  }
+
+  res.send(prices);
 };

@@ -9,18 +9,23 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-  const resourceId = parseInt(req.query.resourceId as string);
-  const ids = futbinPlayerIds.find((p) => p.player_id === resourceId);
+  const informations = [];
 
-  if (!ids) {
-    res.statusCode = 404;
-    res.send({ message: `Player with resourceId = ${resourceId}, not found.` });
-    return;
+  for (const resourceId of (req.query.resourceId as string).split(",")) {
+    const ids = futbinPlayerIds.find((p) => p.player_id === parseInt(resourceId));
+
+    if (!ids) {
+      res.statusCode = 404;
+      res.send({ message: `Player with resourceId = ${resourceId}, not found.` });
+      return;
+    }
+
+    const { data: information } = await Axios.get(
+      `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${ids.futbin_id}`
+    );
+
+    informations.push(information.data[0]);
   }
 
-  const { data } = await Axios.get(
-    `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${ids.futbin_id}`
-  );
-
-  res.send(data.data[0]);
+  res.send(informations);
 };
