@@ -1,0 +1,16 @@
+{
+  "name": "fut-player-db",
+  "version": "1.0.0",
+  "description": "Find FUT player information using resourceId",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/node": "^1.12.1",
+    "jsdom": "^17.0.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^16.2.13"
+  }
+}
