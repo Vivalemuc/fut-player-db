@@ -4,9 +4,9 @@ import Axios from "axios";
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
   const allowedPlatforms = ["PC", "PS", "XB"];
 
-  if (!req.query.resourceId || !req.query.platform) {
+  if (!req.query.squadId || !req.query.platform) {
     res.statusCode = 400;
-    res.send({ message: "Error, you must provide a valid resourceId and platform." });
+    res.send({ message: "Error, you must provide a valid squadId and platform." });
     return;
   } else if (!allowedPlatforms.includes(req.query.platform as string)) {
     res.statusCode = 400;
@@ -17,12 +17,12 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   const { platform } = req.query;
   const sbcs = {};
 
-  for (const resourceId of (req.query.resourceId as string).split(",")) {
+  for (const squadId of (req.query.squadId as string).split(",")) {
     const { data: sbc } = await Axios.get(`
-      https://futbin.org/futbin/api/getSquadByID?squadId=${resourceId}&platform=${platform}
+      https://futbin.org/futbin/api/getSquadByID?squadId=${squadId}&platform=${platform}
     `);
 
-    sbcs[resourceId] = sbc;
+    sbcs[squadId] = sbc;
   }
 
   res.send(sbcs);
