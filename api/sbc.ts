@@ -18,11 +18,15 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   const sbcs = {};
 
   for (const squadId of (req.query.squadId as string).split(",")) {
-    const { data: sbc } = await Axios.get(`
-      https://futbin.org/futbin/api/getSquadByID?squadId=${squadId}&platform=${platform}
-    `);
+    try {
+      const { data: sbc } = await Axios.get(`
+        https://futbin.org/futbin/api/getSquadByID?squadId=${squadId}&platform=${platform}
+      `);
 
-    sbcs[squadId] = sbc;
+      sbcs[squadId] = sbc;
+    } catch {
+      sbcs[squadId] = { success: false };
+    }
   }
 
   res.send(sbcs);
