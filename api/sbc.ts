@@ -28,6 +28,5 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
       sbcs[squadId] = { success: false };
     }
   }
-
   res.send(sbcs);
 };
