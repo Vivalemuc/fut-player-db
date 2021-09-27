@@ -23,7 +23,6 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     const { data: information } = await Axios.get(
       `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${ids.futbin_id}`
     );
-
     informations[resourceId] = information.data[0];
   }
 
