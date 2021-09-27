@@ -14,7 +14,6 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     res.send({ message: "Error, platform value is not valid try PC, PS or XB." });
     return;
   }
-
   var informations = "";
 
   for (const futbinId of (req.query.futbinId as string).split(",")) {
