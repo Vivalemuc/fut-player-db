@@ -14,7 +14,10 @@ const informations = {};
     const { data: information } = await Axios.get(
       `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${futbinId}`
     );
-    informations[futbinId] = information.data[0];
+    var firstPrice = information.data[0].LCPrice;
+    var fifthPrice = information.data[0].LCPrice5;
+    if(fifthPrice*0.95 > firstPrice)
+      informations[futbinId] = information.data[0];
   }
 
   res.send(informations);
