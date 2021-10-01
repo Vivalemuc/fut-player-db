@@ -9,14 +9,21 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   }
 
   const informations = {};
-
+  var promises = [];
+  
+  function getInfo(id) {
+      Axios.get(
+      `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${id}`
+      ).then(function (response) {
+          informations[id] = response.data[0];
+        })
+    }
+  
   for (const futbinId of (req.query.futbinId as string).split(",")) {
-
-    const { data: information } = await Axios.get(
-      `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${futbinId}`
-    );
-    informations[futbinId] = information.data[0];
+    promises.push(getInfo(id));
   }
+  
+  await Promise.all(promises);
 
   res.send(informations);
 };
