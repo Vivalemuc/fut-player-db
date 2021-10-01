@@ -8,7 +8,8 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-const informations = {};
+const errorPrice = "";
+const maybeError = "";
 
   for (const futbinId of (req.query.futbinId as string).split(",")) {
     const { data: information } = await Axios.get(
@@ -16,9 +17,26 @@ const informations = {};
     );
     var firstPrice = information.data[0].LCPrice;
     var fifthPrice = information.data[0].LCPrice5;
-    if(parseInt(fifthPrice)*0.95 > parseInt(firstPrice) && (parseInt(fifthPrice)*0.95-parseInt(firstPrice))>500)
-      informations[futbinId] = information.data[0];
+    if(parseInt(fifthPrice)*0.95 > parseInt(firstPrice) && (parseInt(fifthPrice)*0.95-parseInt(firstPrice))>500){
+        errorPrice+="Name :"+ information.data[0].Player_Name+" ---  1st price : "+firstPrice+" --- 5th price : "+fifthPrice + " --- Benefits : "+(parseInt(fifthPrice)*0.95-parseInt(firstPrice));
+        errorPrice+='<br/>';
+    }
+    if(parseInt(fifthPrice)==0){
+        maybeError+="Name :"+ information.data[0].Player_Name+" ---  1st price : "+firstPrice+" --- 5th price : "+fifthPrice;
+        maybeError+='<br/>';
+    }
   }
-
-  res.send(informations);
+  
+  const finalString="";
+  finalString+="------[Error]------";
+  finalString+='<br/>';
+  finalString+='<br/>';
+  finalString+=errorPrice;
+  finalString+='<br/>';
+  finalString+='<br/>';
+  finalString+="------[Potential]------";
+  finalString+='<br/>';
+  finalString+='<br/>';
+  finalString+=maybeError;
+  res.send(finalString);
 };
