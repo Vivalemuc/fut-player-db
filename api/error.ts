@@ -23,7 +23,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     promises.push(getInfo(futbinId));
   }
   
-  await Promise.all(promises)function (results) {
+  await Promise.all(promises).then(function (results) {
     res.send(informations);
   });
 
