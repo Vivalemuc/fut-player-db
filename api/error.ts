@@ -20,7 +20,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     }
   
   for (const futbinId of (req.query.futbinId as string).split(",")) {
-    promises.push(getInfo(id));
+    promises.push(getInfo(futbinId));
   }
   
   await Promise.all(promises);
