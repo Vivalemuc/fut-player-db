@@ -1,6 +1,5 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import Axios from "axios";
-import futbinPlayerIds from "./futbin-playerids.json";
 
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
   if (!req.query.futbinId) {
