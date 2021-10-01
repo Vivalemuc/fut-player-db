@@ -16,7 +16,7 @@ const informations = {};
     );
     var firstPrice = information.data[0].LCPrice;
     var fifthPrice = information.data[0].LCPrice5;
-    if(parseInt(fifthPrice)*0.95 > parseInt(firstPrice))
+    if(parseInt(fifthPrice)*0.95 > parseInt(firstPrice) && (parseInt(fifthPrice)*0.95-parseInt(firstPrice))>500)
       informations[futbinId] = information.data[0];
   }
 
