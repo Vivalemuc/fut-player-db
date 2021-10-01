@@ -8,22 +8,14 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-  const informations = [];
-  var promises = [];
-  
-  function getInfo(id) {
-     const { data: information } = await Axios.get(
-      `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${id}`
-      );
-      return information.data[0];
-    }
-  
-  for (const futbinId of (req.query.futbinId as string).split(",")) {
-    promises.push(getInfo(futbinId));
-  }
-  
-  Promise.all(promises).then(function (results) {
-    res.send(results);
-  });
+const informations = {};
 
+  for (const futbin of (req.query.futbin as string).split(",")) {
+    const { data: information } = await Axios.get(
+      `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${futbin}`
+    );
+    informations[futbin] = information.data[0];
+  }
+
+  res.send(informations);
 };
