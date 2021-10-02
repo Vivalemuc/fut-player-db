@@ -8,8 +8,8 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-const errorPrice = "";
-const maybeError = "";
+var errorPrice = "";
+var maybeError = "";
 
   for (const futbinId of (req.query.futbinId as string).split(",")) {
     const { data: information } = await Axios.get(
@@ -27,7 +27,7 @@ const maybeError = "";
     }
   }
   
-  const finalString="";
+  var finalString="";
   finalString+="------[Error]------";
   finalString+='<br/>';
   finalString+='<br/>';
