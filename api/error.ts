@@ -16,7 +16,7 @@ var maybeError = "";
 
   for (const futbinId of (req.query.futbinId as string).split(",")) {
     const { data: information } = await Axios.get(
-      `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${futbinId}&platform=${req.query.platform}``
+      `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${futbinId}&platform=${req.query.platform}`
     );
     var playerPrice;
     for(var i=0; i<information.data.length;i++){
