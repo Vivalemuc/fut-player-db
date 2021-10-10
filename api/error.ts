@@ -2,6 +2,8 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 import Axios from "axios";
 
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
+    const allowedPlatforms = ["PC", "PS", "XB"];
+
   if (!req.query.futbinId || !req.query.platform) {
     res.statusCode = 400;
     res.send({ message: "Error, you must provide a valid futbinId and platform." });
