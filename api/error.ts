@@ -17,12 +17,23 @@ var maybeError = "";
     );
     var firstPrice = information.data[0].LCPrice;
     var fifthPrice = information.data[0].LCPrice5;
-    if(parseInt(fifthPrice)*0.95 > parseInt(firstPrice) && (parseInt(fifthPrice)*0.95-parseInt(firstPrice))>500){
-        errorPrice+="Name : "+ information.data[0].Player_Name+" ---  1st price : "+firstPrice+" --- 5th price : "+fifthPrice + " --- Benefits : "+(parseInt(fifthPrice)*0.95-parseInt(firstPrice));
+    var fourthPrice = information.data[0].LCPrice4;
+    var thirdPrice = information.data[0].LCPrice3;
+    
+    var priceToCheck = fifthPrice;
+    if(parseInt(fifthPrice)==0){
+      priceToCheck = fourthPrice;
+      if(parseInt(fourthPrice)==0){
+        priceToCheck = thirdPrice;
+      }
+    }
+
+    if(parseInt(priceToCheck)*0.95 > parseInt(firstPrice) && (parseInt(priceToCheck)*0.95-parseInt(firstPrice))>500){
+        errorPrice+="Name : "+ information.data[0].Player_Name+" ---  Prix achat : "+firstPrice+" --- Prix revente : "+priceToCheck + " --- Benefits : "+(parseInt(priceToCheck)*0.95-parseInt(firstPrice));
         errorPrice+='<br/>';
     }
-    if(parseInt(fifthPrice)==0){
-        maybeError+="Name : "+ information.data[0].Player_Name+" ---  1st price : "+firstPrice+" --- 5th price : "+fifthPrice;
+    if(parseInt(priceToCheck)==0){
+        maybeError+="Name : "+ information.data[0].Player_Name+" ---  Prix achat : "+firstPrice+" --- Prix revente : "+priceToCheck;
         maybeError+='<br/>';
     }
   }
