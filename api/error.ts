@@ -15,27 +15,40 @@ var maybeError = "";
     const { data: information } = await Axios.get(
       `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${futbinId}`
     );
-    var firstPrice = information.data[0].LCPrice;
-    var fifthPrice = information.data[0].LCPrice5;
-    var fourthPrice = information.data[0].LCPrice4;
-    var thirdPrice = information.data[0].LCPrice3;
+    var playerPrice;
+    for(var i=0; i<information.data.length;i++){
+       var player = information.data[i];
+        if(player.ID == futbinId){
+          playerPrice = information.data[i];
+        }
+    }
+    if(playerPrice != null){
+      var firstPrice = playerPrice.LCPrice;
+      var fifthPrice = playerPrice.LCPrice5;
+      var fourthPrice = playerPrice.LCPrice4;
+      var thirdPrice = playerPrice.LCPrice3;
     
-    var priceToCheck = fifthPrice;
-    if(parseInt(fifthPrice)==0){
-      priceToCheck = fourthPrice;
-      if(parseInt(fourthPrice)==0){
-        priceToCheck = thirdPrice;
-      }
+      var priceToCheck = fifthPrice;
+      if(parseInt(fifthPrice)==0){
+        priceToCheck = fourthPrice;
+        if(parseInt(fourthPrice)==0){
+          priceToCheck = thirdPrice;
+        }
     }
 
     if(parseInt(priceToCheck)*0.95 > parseInt(firstPrice) && ((parseInt(priceToCheck)*0.95)-parseInt(firstPrice))>=500){
-        errorPrice+="Name : "+ information.data[0].Player_Name+" ---  Prix achat : "+firstPrice+" --- Prix revente : "+priceToCheck + " --- Benefits : "+(parseInt(priceToCheck)*0.95-parseInt(firstPrice));
+        errorPrice+="Name : "+ playerPrice.Player_Name+" ---  Prix achat : "+firstPrice+" --- Prix revente : "+priceToCheck + " --- Benefits : "+(parseInt(priceToCheck)*0.95-parseInt(firstPrice));
         errorPrice+='<br/>';
     }
     if(parseInt(priceToCheck)==0){
-        maybeError+="Name : "+ information.data[0].Player_Name+" ---  Prix achat : "+firstPrice+" --- Prix revente : "+priceToCheck;
+        maybeError+="Name : "+ playerPrice.Player_Name+" ---  Prix achat : "+firstPrice+" --- Prix revente : "+priceToCheck;
         maybeError+='<br/>';
     }
+      
+    }
+    
+    
+    
   }
   
   var finalString="";
