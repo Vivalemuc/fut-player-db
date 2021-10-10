@@ -28,7 +28,7 @@ var maybeError = "";
       }
     }
 
-    if(parseInt(priceToCheck)*0.95 > parseInt(firstPrice) && (parseInt(priceToCheck)*0.95-parseInt(firstPrice))>500){
+    if(parseInt(priceToCheck)*0.95 > parseInt(firstPrice) && ((parseInt(priceToCheck)*0.95)-parseInt(firstPrice))>=500){
         errorPrice+="Name : "+ information.data[0].Player_Name+" ---  Prix achat : "+firstPrice+" --- Prix revente : "+priceToCheck + " --- Benefits : "+(parseInt(priceToCheck)*0.95-parseInt(firstPrice));
         errorPrice+='<br/>';
     }
