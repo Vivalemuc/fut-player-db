@@ -29,7 +29,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
           player = information.data[i];
         }
     }
-    if(player!=null){
+    if(player!=null && player.LCPrice != 0){
       var price = parseInt(player.LCPrice);
       price = price * 0.95 - parseInt(profit);
       var buyPrice = 0;
@@ -44,6 +44,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
         } else {
             buyPrice =  Math.floor(price / 1000.0) * 1000;
         }
+      
       if(player.Player_ID == player.Player_Resource){
         informations+=`{"name": "${player.Player_Name}","maskedDefId": ${player.Player_Resource},"buyPrice": ${buyPrice},"sellPrice": ${player.LCPrice},"sellBid":0,"level":"any","rarity":${player.Rare_Type},"style": -1,"position":"any","zone":-1, "maxPurchases":1,"buyIf":${player.Player_Rating}, "sellIf":${player.Player_Rating},"buyWithStyle":false, "minContract":0}`;
       }else{
