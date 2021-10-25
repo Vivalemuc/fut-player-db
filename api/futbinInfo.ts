@@ -29,7 +29,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
           player = information.data[i];
         }
     }
-    if(player!=null && player.LCPrice != 0){
+    if(player!=null && parseInt(player.LCPrice) != 0){
       var price = parseInt(player.LCPrice);
       price = price * 0.95 - parseInt(profit);
       var buyPrice = 0;
