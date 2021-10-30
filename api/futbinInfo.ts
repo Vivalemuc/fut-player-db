@@ -50,7 +50,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
         }
       var sellP = 0;
       if(sellPrice != 0){
-        sellP = price; 
+        sellP = sellPrice; 
       }else{
         sellP = parseInt(player.LCPrice);
       }
