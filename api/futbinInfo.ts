@@ -18,6 +18,10 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   if(req.query.profit){
     profit = parseInt(req.query.profit);
   }
+  var sellPrice = 0;
+  if(req.query.sellPrice){
+    sellPrice = parseInt(req.query.sellPrice);
+  }
   for (const futbinId of (req.query.futbinId as string).split(",")) {
     const { data: information } = await Axios.get(
       `https://futbin.org/futbin/api/fetchPlayerInformation?ID=${futbinId}&platform=${req.query.platform}`
@@ -44,11 +48,17 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
         } else {
             buyPrice =  Math.floor(price / 1000.0) * 1000;
         }
+      var sellP = 0;
+      if(sellPrice != 0){
+        sellP = price; 
+      }else{
+        sellP = parseInt(player.LCPrice);
+      }
       
       if(player.Player_ID == player.Player_Resource){
-        informations+=`{"name": "${player.Player_Name}","maskedDefId": ${player.Player_Resource},"buyPrice": ${buyPrice},"sellPrice": ${player.LCPrice},"sellBid":0,"level":"any","rarity":${player.Rare_Type},"style": -1,"position":"any","zone":-1, "maxPurchases":1,"buyIf":${player.Player_Rating}, "sellIf":${player.Player_Rating},"buyWithStyle":false, "minContract":0}`;
+        informations+=`{"name": "${player.Player_Name}","maskedDefId": ${player.Player_Resource},"buyPrice": ${buyPrice},"sellPrice": ${sellP},"sellBid":0,"level":"any","rarity":${player.Rare_Type},"style": -1,"position":"any","zone":-1, "maxPurchases":1,"buyIf":${player.Player_Rating}, "sellIf":${player.Player_Rating},"buyWithStyle":false, "minContract":0}`;
       }else{
-        informations+=`{"name": "${player.Player_Name}","defId": ${player.Player_Resource},"buyPrice":${buyPrice},"sellPrice": ${player.LCPrice},"sellBid":0,"level":"any","rarity":${player.Rare_Type},"style": -1,"position":"any","zone":-1, "maxPurchases":1,"buyIf":${player.Player_Rating}, "sellIf":${player.Player_Rating},"buyWithStyle":false, "minContract":0}`;
+        informations+=`{"name": "${player.Player_Name}","defId": ${player.Player_Resource},"buyPrice":${buyPrice},"sellPrice": ${sellP},"sellBid":0,"level":"any","rarity":${player.Rare_Type},"style": -1,"position":"any","zone":-1, "maxPurchases":1,"buyIf":${player.Player_Rating}, "sellIf":${player.Player_Rating},"buyWithStyle":false, "minContract":0}`;
       }
       
     } 
