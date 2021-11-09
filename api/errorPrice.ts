@@ -9,11 +9,10 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     res.send({ message: "Error, you must provide a valid platform." });
     return;
   } 
-var errorPrice = "";
-var maybeError = "";
- const { data: information } = await Axios.get(
+
+ let error = await Axios.get(
       `http://smp-ar.com/api/futbinPricesErrors?key=za3dh5u4da52si34a2fiezohih$zae&platform=${req.query.platform}`
     );
 
-  res.send(information);
+  res.send(error.data);
 };
