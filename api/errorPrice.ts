@@ -5,7 +5,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
    
       
    
-   axios({
+   Axios({
   method: 'get',
   url:  `https://smp-ar.com/api/futbinPricesErrors?key=za3dh5u4da52si34a2fiezohih$zae&platform=${req.query.platform}`})
   .then(function (response) {
