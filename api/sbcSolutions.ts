@@ -2,7 +2,6 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 import Axios from "axios";
 
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
-  const allowedPlatforms = ["PC", "PS", "XB"];
 
   if (!req.query.challengeId) {
     res.statusCode = 400;
@@ -11,7 +10,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   }
 
       const { data: squads } = await Axios.get(`
-        https://futbin.org/futbin/api/getStcSquads?challenge=${challengeId}
+        https://futbin.org/futbin/api/getStcSquads?challenge=${req.query.challengeId}
       `);
 
     
