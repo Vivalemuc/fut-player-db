@@ -10,7 +10,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-      const { squads: squads } = await Axios.get(`
+      const { data: squads } = await Axios.get(`
         https://futbin.org/futbin/api/getStcSquads?challenge=${challengeId}
       `);
 
