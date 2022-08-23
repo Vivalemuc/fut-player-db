@@ -12,8 +12,9 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
       const { data: prices } = await Axios.get(`
         https://futbin.org/futbin/api/fetchDailyGraphInformation?platform=${req.query.platform}&playerresource=${req.query.resourceId}
       `);
-  
-  prices["data"].slice(Math.max(prices["data"].length - 5, 0))      
+  if(prices["data"].length > 5){
+  prices["data"].slice(-5)   ;
+  }
     
   res.send(prices["data"]);
 };
