@@ -13,8 +13,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
         https://futbin.org/futbin/api/fetchDailyGraphInformation?platform=${req.query.platform}&playerresource=${req.query.resourceId}
       `);
   if(prices["data"].length > 5){
-  prices["data"].slice(-5)   ;
-  }
-    
-  res.send(prices["data"]);
+    res.send(prices["data"].slice(-5));
+  }else
+    res.send(prices["data"]);
 };
