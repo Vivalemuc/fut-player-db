@@ -19,7 +19,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
 
   for (const resourceId of (req.query.resourceId as string).split(",")) {
     const { data: price } = await Axios.get(
-      `https://futbin.org/futbin/api/fetchPriceInformation?playerresource=${resourceId}&platform=${platform}`
+      `https://futbin.org/futbin/api/23/fetchPriceInformation?playerresource=${resourceId}&platform=${platform}`
     );
 
     prices[resourceId] = price;
