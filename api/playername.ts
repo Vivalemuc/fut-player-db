@@ -10,7 +10,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   }
 
       const { data: players } = await Axios.get(`
-        https://futbin.org/futbin/api/searchPlayersByName?playername=${req.query.playerName}
+        https://futbin.org/futbin/api/searchPlayersByName?playername=${req.query.playerName}&year=23
       `);
 
     
