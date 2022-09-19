@@ -20,7 +20,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   for (const squadId of (req.query.squadId as string).split(",")) {
     try {
       const { data: sbc } = await Axios.get(`
-        https://futbin.org/futbin/api/getSquadByID?squadId=${squadId}&platform=${platform}
+        https://futbin.org/futbin/api/23/getSquadByID?squadId=${squadId}&platform=${platform}
       `);
 
       sbcs[squadId] = sbc;
