@@ -11,6 +11,6 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
 
   const sbcs = {};
 
- const { players: sbc } = await Axios.post(`https://5fmhq2i8rp.eu-west-1.awsapprunner.com/sbcs`, {"id":"`${sbcId}`","hybrid":4,"untradeable":false,"excludePosModifiers":false});
+ const { players: sbc } = await Axios.post(`https://5fmhq2i8rp.eu-west-1.awsapprunner.com/sbcs`, {"id":"+req.query.sbcId+","hybrid":4,"untradeable":false,"excludePosModifiers":false});
  res.send(sbc);
 };
