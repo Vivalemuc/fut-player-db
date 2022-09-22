@@ -4,15 +4,11 @@ import Axios from "axios";
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
   const allowedPlatforms = ["PC", "PS", "XB"];
 
-  if (!req.query.squadId || !req.query.platform) {
+  if (!req.query.squadId) {
     res.statusCode = 400;
     res.send({ message: "Error, you must provide a valid squadId and platform." });
     return;
-  } else if (!allowedPlatforms.includes(req.query.platform as string)) {
-    res.statusCode = 400;
-    res.send({ message: "Error, platform value is not valid try PC, PS or XB." });
-    return;
-  }
+  } 
 
   const { platform } = req.query;
   const sbcs = {};
@@ -20,7 +16,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   for (const squadId of (req.query.squadId as string).split(",")) {
     try {
       const { data: sbc } = await Axios.get(`
-        https://futbin.org/futbin/api/23/getSquadByID?squadId=${squadId}&platform=${platform}
+        https://futbin.org/futbin/api/23/getSquadByID?squadId=${squadId}&platform=PS
       `);
 
       sbcs[squadId] = sbc;
