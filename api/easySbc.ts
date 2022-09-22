@@ -13,5 +13,5 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   const body = {"id":req.query.sbcId,"hybrid":4,"untradeable":false,"excludePosModifiers":false};
 
  const response = await Axios.post(`https://5fmhq2i8rp.eu-west-1.awsapprunner.com/sbcs`, body);
- res.send(response);
+ res.send(response.data);
 };
