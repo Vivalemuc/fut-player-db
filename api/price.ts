@@ -10,8 +10,8 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   } 
 
-  const { platform } = req.query;
-  if(platform == "XB"){
+  var  platform  = req.query.platform;
+  if(platform === "XB"){
     platform="PS"; 
   }
   const prices = {};
