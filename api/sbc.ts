@@ -10,9 +10,11 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     return;
   } 
 
-  const { platform } = req.query;
+  var  platform  = req.query.platform;
+  if(platform === "XB"){
+    platform="PS"; 
+  }
   const sbcs = {};
-  if(platform =="XB") platform = "PS";
 
   for (const squadId of (req.query.squadId as string).split(",")) {
     try {
