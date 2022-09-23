@@ -8,9 +8,13 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     res.send({ message: "Error, you must provide a valid challengeId." });
     return;
   }
+  let noPos = "";
+  if(req.query.noPos){
+       noPos = "&pos_change=0";
+  }
 
       const { data: squads } = await Axios.get(`
-        https://futbin.org/futbin/api/getChallengeTopSquads?chal_id=${req.query.challengeId}&platform=PS
+        https://futbin.org/futbin/api/getChallengeTopSquads?chal_id=${req.query.challengeId}&platform=PS${noPos}
       `);
 
     
