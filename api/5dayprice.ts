@@ -8,9 +8,10 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     res.send({ message: "Error, you must provide a valid resourceId." });
     return;
   }
-    const {platform} = req.query;
-    if(platform =="XB") platform = "PS";
-
+    var  platform  = req.query.platform;
+  if(platform === "XB"){
+    platform="PS"; 
+  }
 
       const { data: prices } = await Axios.get(`
         https://futbin.org/futbin/api/fetchDailyGraphInformation?platform=${platform}&playerresource=${req.query.resourceId}
