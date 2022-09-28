@@ -3,7 +3,7 @@ import Axios from "axios";
 
 module.exports = async (req: VercelRequest, res: VercelResponse) => {
 
-  if (!req.query.setId) {
+  if (!req.query.sbcId) {
     res.statusCode = 400;
     res.send({ message: "Error, you must provide a valid sbcId." });
     return;
