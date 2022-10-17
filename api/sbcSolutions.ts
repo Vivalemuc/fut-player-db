@@ -12,6 +12,9 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
   if(req.query.noPos){
        noPos = "&pos_change=0";
   }
+  if(req.query.gold){
+    noPos +="&version=gold";
+  }
 
       const { data: squads } = await Axios.get(`
         https://futbin.org/futbin/api/getChallengeTopSquads?chal_id=${req.query.challengeId}&platform=PS${noPos}
